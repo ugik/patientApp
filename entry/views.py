@@ -17,10 +17,8 @@ def hello(request):
     msg = request.POST['msg']
     json = t.say("you just said: " + msg)
     json = t.RenderJson(json)
-    print json
     try:
-        return  HttpResponse('Hello SMS World') 
-#        return HttpResponse(json) 
+        return HttpResponse(json) 
     except Exception, err:
         print('ERROR: %s\n' % str(err))
 
