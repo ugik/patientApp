@@ -20,7 +20,7 @@ def hello(request):
     
     try:
         s = Session(request.body)
-        print('Cell #%s' % s.fromaddress.dict['id'])
+        print('Cell #%s' % s.fromaddress['id'])
         return HttpResponse(json) 
     except Exception, err:
         print('ERROR: %s\n' % str(err))
