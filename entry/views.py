@@ -16,11 +16,11 @@ def hello(request):
     t = Tropo()
     msg = request.POST['msg']
     json = t.say("you just said: " + msg)
-    print "Step: RenderJson"
     json = t.RenderJson(json)
-    print "Step: after RenderJson"
+    print json
     try:
-        return HttpResponse(json) 
+        return  HttpResponse('Hello SMS World') 
+  #        return HttpResponse(json) 
     except:
         print "Error:", sys.exc_info()[0]
 
