@@ -17,6 +17,8 @@ def hello(request):
     msg = request.POST['msg']
     json = t.say("you just said: " + msg)
     json = t.RenderJson(json)
+    print t.Session
+    
     try:
         return HttpResponse(json) 
     except Exception, err:
