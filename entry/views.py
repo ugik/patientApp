@@ -13,16 +13,16 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def hello(request):
-    print "Step 1"
     t = Tropo()
-    print "Step 2"
     msg = request.POST['msg']
-    print "Step 3"
     json = t.say("you just said: " + msg)
-    print "Step 4"
+    print "Step: RenderJson"
     json = t.RenderJson(json)
-    return HttpResponse(json) 
-
+    print "Step: after RenderJson"
+    try:
+        return HttpResponse(json) 
+    except:
+        print "Error:", sys.exc_info()[0]
 
 def HomePage(request):
     context = {}
