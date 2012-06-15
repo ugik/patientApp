@@ -20,7 +20,7 @@ def hello(request):
     
     try:
         s = Session(request.body)
-        print s
+        print s.fromaddress
         return HttpResponse(json) 
     except Exception, err:
         print('ERROR: %s\n' % str(err))
