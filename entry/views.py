@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response
 from entry.models import Patient, Entry
 from entry.forms import RegistrationForm, LoginForm, EntryForm
 
-from tropo import Tropo
+from tropo import Tropo, Session
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
@@ -17,9 +17,10 @@ def hello(request):
     msg = request.POST['msg']
     json = t.say("you just said: " + msg)
     json = t.RenderJson(json)
-    print t.Session
     
     try:
+        s = Session(request.body)
+        print s
         return HttpResponse(json) 
     except Exception, err:
         print('ERROR: %s\n' % str(err))
