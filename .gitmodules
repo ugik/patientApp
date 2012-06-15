@@ -1,0 +1,3 @@
+[submodule "tropo"]
+	path = tropo
+	url = https://github.com/tropo/tropo-webapi-python.git

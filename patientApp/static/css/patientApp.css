@@ -1,0 +1,21 @@
+body {
+    background-attachment: fixed;
+    background-color: #FFFFFF;
+    background-image: url(/static/images/CaringHands.jpg);
+    background-position: center bottom;
+#    background-repeat: no-repeat;
+    color: #A90123;
+    margin: 20;
+    padding: 20;
+}
+
+#pageContainer {
+    background: url(/static/images/medical.jpg) no-repeat scroll right bottom #FFFFFF;
+    background-size: 200px 200px;    
+    margin: 10 auto;
+    padding: 25;
+    position: relative;
+    width: 750px;
+    min-height: 500px;
+}
+

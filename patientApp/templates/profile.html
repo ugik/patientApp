@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p>Name: {{patient.name}}</p>
+    <p>Birthday: {{patient.birthday }}</p>
+<br>
+    <div id='entrylist'>
+        {% for entry in patient.entry_set.all %}
+        <p>{{ entry }}</p>
+        {% endfor %}
+    </div>
+
+<a href='/entry/'>Add Entry</a>
+{% endblock %}

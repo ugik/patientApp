@@ -1,0 +1,19 @@
+body {
+    background-attachment: fixed;
+    background-color: #FFFFFF;
+    background-image: url(/static/images/beers_background.jpg);
+    background-position: center bottom;
+#    background-repeat: no-repeat;
+    color: #A90123;
+    margin: 5;
+    padding: 5;
+}
+
+#pageContainer {
+    background: url(/static/images/beers.jpg) no-repeat scroll center bottom #FFFFFF;
+    margin: 0 auto;
+    position: relative;
+    width: 710px;
+    min-height: 800px;
+}
+
