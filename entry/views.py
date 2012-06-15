@@ -20,9 +20,9 @@ def hello(request):
     print json
     try:
         return  HttpResponse('Hello SMS World') 
-  #        return HttpResponse(json) 
-    except:
-        print "Error:", sys.exc_info()[0]
+#        return HttpResponse(json) 
+    except Exception, err:
+        print('ERROR: %s\n' % str(err))
 
 def HomePage(request):
     context = {}
