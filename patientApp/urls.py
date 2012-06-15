@@ -15,3 +15,4 @@ urlpatterns = patterns('',
     (r'^hello/$', 'entry.views.hello'),
     url(r'^admin/', include(admin.site.urls)),
 )
+
