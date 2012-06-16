@@ -13,15 +13,15 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def hello(request):
-    t = Tropo()
-    msg = request.POST['msg']
-
     try:
+        t = Tropo()
+        msg = request.POST['msg']
+
         s = Session(request.body)
-        print('Cell #%s' % s.fromaddress['id'])
+        cell = s.fromaddress['id']
+        print('Cell #%s' % cell)
 
 # lookup patient with this cell #
-        cell = s.fromaddress['id']
         if cell[0] is '1':   # trim leading 1 in cell # if there
             cell = cell[1:]
         p = Patient.objects.filter(cell=cell)   # all patients with this cell #
