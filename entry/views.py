@@ -15,8 +15,6 @@ from django.views.decorators.csrf import csrf_exempt
 def hello(request):
     t = Tropo()
     msg = request.POST['msg']
-    json = t.say("you just said: " + msg)
-    json = t.RenderJson(json)
     
     try:
         s = Session(request.body)
@@ -28,7 +26,7 @@ def hello(request):
             cell = cell[1:]
         p = Patient.objects.filter(cell=cell)   # all patients with this cell #
         if p.exists():                                    # if cell # found then create new entry
-            if p.count()>1
+            if p.count()>1:
                 print('WARNING: Multiple patients with cell # %s' % cell)
             parent = p[0]  # assume first 
             entry = Entry(patient=parent, entry=msg)
