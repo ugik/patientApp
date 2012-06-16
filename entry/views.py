@@ -19,11 +19,12 @@ def hello(request):
     try:
         s = Session(request.body)
         cell = s.fromaddress['id']
-        print('Cell #%s' % cell)
 
 # lookup patient with this cell #
         if cell[0] is '1':   # trim leading 1 in cell # if there
+            print('Trimming cell # %s' % cell)
             cell = cell[1:]
+        print('Cell #%s' % cell)
         p = Patient.objects.filter(cell=cell)   # all patients with this cell #
         if p.exists():                                    # if cell # found then create new entry
             if p.count()>1:
