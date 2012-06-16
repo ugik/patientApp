@@ -22,7 +22,8 @@ def hello(request):
 
 # lookup patient with this cell #
         print('Cell[0]:%s' % cell[0])
-        if cell[0] is '1':   # trim leading 1 in cell # if there
+        print('Cell[0]==1:%s' % cell[0]==1)
+        if cell[0]=='1':   # trim leading 1 in cell # if there
             print('Trimming cell # %s' % cell)
             cell = cell[1:]
         print('Cell #%s' % cell)
