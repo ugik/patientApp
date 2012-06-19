@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response
 from entry.models import Patient, Entry
 from entry.forms import RegistrationForm, LoginForm, EntryForm
 
-from tropo import Tropo, Session
+from tropo import Tropo, Session, Message
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
@@ -21,10 +21,7 @@ def hello(request):
         cell = s.fromaddress['id']
 
 # lookup patient with this cell #
-        print('Cell[0]:%s' % cell[0])
-        print('Cell[0]==1:%s' % cell[0]==1)
         if cell[0]=='1':   # trim leading 1 in cell # if there
-            print('Trimming cell # %s' % cell)
             cell = cell[1:]
         print('Cell #%s' % cell)
         p = Patient.objects.filter(cell=cell)   # all patients with this cell #
@@ -59,9 +56,19 @@ def PatientRegistration(request):
         if form.is_valid():
             user = User.objects.create_user(username=form.cleaned_data['name'], email = form.cleaned_data['email'], password = form.cleaned_data['password'])
             user.save()
-            patient = Patient(user=user, name=form.cleaned_data['name'], birthday=form.cleaned_data['birthday'], gender = form.cleaned_data['gender'], email = form.cleaned_data['email'])
+            patient = Patient(user=user, name=form.cleaned_data['name'], birthday=form.cleaned_data['birthday'], gender = form.cleaned_data['gender'], email = form.cleaned_data['email'], cell = form.cleaned_data['cell'])
             patient.save()
+
+            # text patient if cell # provided
+            if len(patient.cell)==10:
+                t = Tropo()
+                json = t.say("Thank you for registering " + patient.name)
+                json = t.RenderJson(json)
+                print "Registration confirmation sent"
+#                t.message("Thank you for registering.", {"to":"+17816408832", "network":"SMS"})
+                t.message("Thank you for registering", "+17816408832", channel='TEXT', network='SMS', timeout=5)
             return HttpResponseRedirect('/profile/')
+
         else:
 #            print form.errors
             return render_to_response('register.html', {'form':form}, context_instance=RequestContext(request))

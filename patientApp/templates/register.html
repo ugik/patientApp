@@ -13,36 +13,67 @@
 <form action="" method="post">
 {% csrf_token %}
 {% if form.errors %}<p>Please correct the following fields:</p>{% endif %}
-<div class="register_div">
-    {% if form.name.errors %}<p class="error">{{ form.name.errors }}</p>{% endif %}
+
+<TABLE BORDER="0">
+<TR>
+    <TD>
+    {% if form.name.errors %}<p class="error">{{ form.name.errors }}</p>{% endif %}    
     <p><label for="name" {% if form.name.errors %} class="error">{% endif %}>Username:</label></p>
-    <p>{{ form.name }}</p>
-</div>
-<div class="register_div">
+    </TD>
+    <TD><p>{{ form.name }}</p></TD>
+</TR>
+
+<TR>
+    <TD>
     {% if form.email.errors %}<p class="error">{{ form.email.errors }}</p>{% endif %}
-    <p><label for="email" {% if form.email.errors %} class="error">{% endif %}>Email:</label></p>
-    <p>{{ form.email }}</p>
-</div>
-<div class="register_div">
+    <p><label for="email" {% if form.email.errors %} class="error">{% endif %}>Email:</label></p>    
+    </TD>
+    <TD><p>{{ form.email }}</p></TD>
+</TR>
+
+<TR>
+    <TD>
     {% if form.password.errors %}<p class="error">{{ form.password.errors }}</p>{% endif %}
     <p><label for="password" {% if form.password.errors %} class="error">{% endif %}>Password:</label></p>
-    <p>{{ form.password }}</p>
-</div>
-<div class="register_div">
+    </TD>
+    <TD><p>{{ form.password }}</p></TD>
+</TR>
+
+<TR>
+    <TD>
     {% if form.password1.errors %}<p class="error">{{ form.password1.errors }}</p>{% endif %}
     <p><label for="password1" {% if form.password1.errors %} class="error">{% endif %}>Verify Password:</label></p>
-    <p>{{ form.password1 }}</p>
-</div>
-<div class="register_div">
+    </TD>
+    <TD><p>{{ form.password1 }}</p></TD>
+</TR>
+
+
+<TR>
+    <TD>
     {% if form.birthday.errors %}<p class="error">{{ form.birthday.errors }}</p>{% endif %}
     <p><label for="birthday" {% if form.birthday.errors %} class="error">{% endif %}>Birthday:</label></p>
-    <p>{{ form.birthday }}</p>
-</div>
-<div class="register_div">
+    </TD>
+    <TD><p>{{ form.birthday }}</p></TD>
+</TR>
+
+<TR>
+    <TD>
     {% if form.gender.errors %}<p class="error">{{ form.gender.errors }}</p>{% endif %}
     <p><label for="gender" {% if form.gender.errors %} class="error">{% endif %}>Gender:</label></p>
-    <p>{{ form.gender }}</p>
-</div>
-<p><input type="submit" alt="register"/></p>
+    </TD>
+    <TD><p>{{ form.gender }}</p></TD>
+</TR>
+
+<TR>
+    <TD>
+    {% if form.cell.errors %}<p class="error">{{ form.cell.errors }}</p>{% endif %}
+    <p><label for="cell" {% if form.cell.errors %} class="error">{% endif %}>Cell #:</label></p>
+    </TD>
+    <TD><p>{{ form.cell }}</p></TD>
+</TR>
+
+</TABLE>
+
+<p><input type="submit" value="Register" alt="register"/></p>
 </form>
 {% endblock %}
