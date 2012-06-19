@@ -67,6 +67,9 @@ def PatientRegistration(request):
                 print "Registration confirmation sent"
 #                t.message("Thank you for registering.", {"to":"+17816408832", "network":"SMS"})
                 t.message("Thank you for registering", "+17816408832", channel='TEXT', network='SMS', timeout=5)
+                t.message("Thank you for registering", "17816408832", channel='TEXT', network='SMS', timeout=5)
+                t.message("Thank you for registering", "7816408832", channel='TEXT', network='SMS', timeout=5)
+                t.message("Thank you for registering.", {"to":"+17816408832", "network":"SMS"})
             return HttpResponseRedirect('/profile/')
 
         else:
