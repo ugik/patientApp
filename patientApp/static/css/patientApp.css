@@ -10,8 +10,8 @@ body {
 }
 
 #pageContainer {
-    background: url(/static/images/medical.jpg) no-repeat scroll right bottom #FFFFFF;
-    background-size: 200px 200px;    
+    background: url(/static/images/aLogo.jpg) no-repeat scroll right bottom #FFFFCC;
+    background-size: 100px 100px;
     margin: 10 auto;
     padding: 25;
     position: relative;

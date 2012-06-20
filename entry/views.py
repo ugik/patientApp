@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render_to_response
 from entry.models import Patient, Entry
 from entry.forms import RegistrationForm, LoginForm, EntryForm
+from urllib import urlencode
+from urllib2 import urlopen
 
 from tropo import Tropo, Session, Message
 from django.views.decorators.csrf import csrf_exempt
@@ -62,17 +64,20 @@ def PatientRegistration(request):
             # text patient if cell # provided
             if len(patient.cell)==10:
                 t = Tropo()
-                json = t.say("Thank you for registering " + patient.name)
-                json = t.RenderJson(json)
-                print "Registration confirmation sent"
-#                t.message("Thank you for registering.", {"to":"+17816408832", "network":"SMS"})
-                t.message("Thank you for registering", "+17816408832", channel='TEXT', network='SMS', timeout=5)
-                t.message("Thank you for registering", "17816408832", channel='TEXT', network='SMS', timeout=5)
-                t.message("Thank you for registering", "7816408832", channel='TEXT', network='SMS', timeout=5)
+                t.say("Thank you for registering " + patient.name)
                 t.message("Thank you for registering.", {"to":"+17816408832", "network":"SMS"})
+                t.RenderJson()
+                print "Registration confirmation sent"
+
             return HttpResponseRedirect('/profile/')
 
-        else:
+#                try:
+#                    t.message("Thank you for registering.", {"to":"+17816408832", "network":"SMS"})
+#                send_message("+17816408832", "Thank you for registering.")
+#                except Exception, err:
+#                    print('ERROR: %s\n' % str(err))
+
+        else:   # form is not valid
 #            print form.errors
             return render_to_response('register.html', {'form':form}, context_instance=RequestContext(request))
     
@@ -138,4 +143,15 @@ def AddEntry(request):
             return render_to_response('entry.html', context, context_instance=RequestContext(request))
     else:
         pass
+
+
+def send_message(cell, msg):
+    base_url = 'http://api.tropo.com/1.0/sessions'
+    token = '12daaf2f2af6544eb5b8eae626a666bb4f89ccc541e31709bedaacbcb9bdde8bc968cc06d2019ef2f0bde72a'      
+    action = 'create'
+    number  = cell
+    message = msg
+        
+    params = urlencode([('action', action), ('token', token), ('to_num', number), ('message', message), ('outgoing', True)])
+    urlopen('%s?%s' % (base_url, params))
 
