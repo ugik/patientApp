@@ -65,7 +65,7 @@ def PatientRegistration(request):
             if len(patient.cell)==10:
                 t = Tropo()
                 t.say("Thank you for registering " + patient.name)
-                t.message("Thank you for registering.", {"to":"+17816408832", "network":"SMS"})
+                t.message("Thank you for registering.", to="+17813128445", network = "SMS")
                 t.RenderJson()
                 print "Registration confirmation sent"
 
@@ -132,7 +132,10 @@ def AddEntry(request):
                 parent = request.user.get_profile()
                 entry = Entry(patient=parent, entry=form.cleaned_data['entry'], description=form.cleaned_data['description'])
                 entry.save()
-                return HttpResponseRedirect('/profile/')
+                if form.cleaned_data['entry'].find('CODE')>-1:
+                    return HttpResponseRedirect('/code/')
+                else:
+                    return HttpResponseRedirect('/profile/')
             else:
                 print form.errors
                 return render_to_response('entry.html', {'form':form}, context_instance=RequestContext(request))
