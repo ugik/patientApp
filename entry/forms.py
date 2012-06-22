@@ -28,7 +28,7 @@ class RegistrationForm(ModelForm):
 
 class EntryForm(ModelForm):
     entry                    = forms.CharField(label=(u'Entry'))
-    description           =  forms.CharField(label=(u'Description'), widget=forms.Textarea)
+    desc                     =  forms.CharField(label=(u'Description'), widget=forms.Textarea)
 
     class Meta:
         model = Entry

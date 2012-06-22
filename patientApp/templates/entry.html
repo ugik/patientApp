@@ -9,9 +9,9 @@
     <p>{{ form.entry }}</p>
 </div>
 <div class="register_div">
-    {% if form.description.errors %}<p class="error">{{ form.description.errors }}</p>{% endif %}
-    <p><label for="description" {% if form.description.errors %} class="error">{% endif %}>Description:</label></p>
-    <p>{{ form.description }}</p>
+    {% if form.desc.errors %}<p class="error">{{ form.desc.errors }}</p>{% endif %}
+    <p><label for="desc" {% if form.desc.errors %} class="error">{% endif %}>Description:</label></p>
+    <p>{{ form.desc }}</p>
 </div>
 <p><input type="submit" alt="register"/></p>
 </form>

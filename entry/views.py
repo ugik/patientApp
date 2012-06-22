@@ -133,7 +133,7 @@ def AddEntry(request):
             form = EntryForm(request.POST)
             if form.is_valid():
                 parent = request.user.get_profile()
-                entry = Entry(patient=parent, entry=form.cleaned_data['entry'], description=form.cleaned_data['description'])
+                entry = Entry(patient=parent, entry=form.cleaned_data['entry'], desc=form.cleaned_data['desc'])
                 entry.save()
                 if form.cleaned_data['entry'].find('CODE')>-1:
                     return HttpResponseRedirect('/code/')
