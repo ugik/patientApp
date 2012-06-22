@@ -84,7 +84,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'yrx64s1w'
+SECRET_KEY = 'yrx64s1wyrx64s1w'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -114,7 +114,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     #    '/home/gk/Django/mysite/mysite',
     os.path.join(SITE_ROOT),
-    os.path.join(SITE_ROOT)+'/templates',
+    os.path.join(SITE_ROOT)+'/templates/',
 )
 
 INSTALLED_APPS = (
@@ -137,6 +137,13 @@ AUTH_PROFILE_MODULE = 'entry.Patient'
 # login settings
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/profile/'
+
+# gmail SMTP setup
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ugikma@gmail.com'
+EMAIL_HOST_PASSWORD = 'GMAIL_PASSWORD'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

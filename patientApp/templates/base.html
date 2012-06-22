@@ -6,7 +6,7 @@
 <body>
 <div id='pageContainer'>
     <div id="nav_top_right">
-        {% if user.is_authenticated %}<p><a href='/logout/'>Logout</a></p>{% else %}<p><a href='/login/'>Login</a></p>
+        {% if user.is_authenticated %}<p><small><a href='/logout/'>Logout</a></small></p>{% else %}<p><small><a href='/login/'>Login</a></small></p>
         {% endif %}
     </div>
     {% block content %}
