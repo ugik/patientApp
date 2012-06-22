@@ -33,7 +33,10 @@ def hello(request):
             parent = p[0]  # assume first 
             entry = Entry(patient=parent, entry=msg)
             entry.save()
-            json = t.say("Entry saved, thank you " + parent.name)
+            if msg.find('CODE')>-1:
+                json = t.say("Congratulations " + parent.name + " your code qualified you for a prize!")            
+            else:
+                json = t.say("Entry saved, thank you " + parent.name)
             json = t.RenderJson(json)
         else:                                               # if cell # NOT found then notify
             json = t.say("Could not find patient with cell # " + cell)
