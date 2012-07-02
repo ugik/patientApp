@@ -25,8 +25,9 @@ def hello(request):
             print('To:%s' % session.parameters['to'])
             print('Msg:%s' % session.parameters['msg'])
             t.call(to="+17816408832", network = "SMS")
-            t.say("Tag, you're it!")
-            return t.RenderJson()
+            json = t.say("Tag, you're it!")
+            json = t.Renderjson(json)
+            return HttpResponse(json)
 
         else :
 
