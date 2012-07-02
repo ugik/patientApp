@@ -22,8 +22,8 @@ def hello(request):
         if('parameters' in dir(session)):
             print('Found Params')
 
-            print('Cell #:%s' % s.parameters['numbertodial'])
-            print('Msg:%s' % s.parameters['msg'])
+            print('Cell #:%s' % session.parameters['numbertodial'])
+            print('Msg:%s' % session.parameters['msg'])
             t.call(to="+17816408832", network = "SMS")
             t.say("Tag, you're it!")
             return t.RenderJson()
