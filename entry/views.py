@@ -17,11 +17,15 @@ from django.views.decorators.csrf import csrf_exempt
 def hello(request):
     try:
         t = Tropo()
-        
-        msg = request.POST.get('msg', '-empty-')
-        print('MSG:%s' % msg)
+                
+        session = Session(request.body)
+        if('parameters' in dir(session)):
+            print('Found Params')
+            json = t.say("Sending TEXT MSG")
 
-        if msg!='-empty-':
+        else :
+
+            msg = request.POST.get('msg', '')
             s = Session(request.body)
             cell = s.fromaddress['id']
 
@@ -40,12 +44,9 @@ def hello(request):
                     json = t.say("Congratulations " + parent.name + " your code qualified you for a prize!")            
                 else:
                     json = t.say("Entry saved, thank you " + parent.name)
-                json = t.RenderJson(json)
             else:                                               # if cell # NOT found then notify
                 json = t.say("Could not find patient with cell # " + cell)
-        else:
-            json = t.say("Empty Request")
-            
+
         json = t.RenderJson(json)
 
         return HttpResponse(json)
