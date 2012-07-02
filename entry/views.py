@@ -21,7 +21,12 @@ def hello(request):
         session = Session(request.body)
         if('parameters' in dir(session)):
             print('Found Params')
-            json = t.say("Sending TEXT MSG")
+
+            print('Cell #:%s' % s.parameters['numbertodial'])
+            print('Msg:%s' % s.parameters['msg'])
+            t.call(to="+17816408832", network = "SMS")
+            t.say("Tag, you're it!")
+            return t.RenderJson()
 
         else :
 
@@ -47,9 +52,9 @@ def hello(request):
             else:                                               # if cell # NOT found then notify
                 json = t.say("Could not find patient with cell # " + cell)
 
-        json = t.RenderJson(json)
+            json = t.RenderJson(json)
+            return HttpResponse(json)
 
-        return HttpResponse(json)
     except Exception, err:
         print('ERROR: %s\n' % str(err))
 
