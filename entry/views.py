@@ -17,32 +17,34 @@ from django.views.decorators.csrf import csrf_exempt
 def hello(request):
     try:
         t = Tropo()
-        msg = request.POST['msg']
-
-        print('MSG: %S\n' % msg)
-        s = Session(request.body)
-        cell = s.fromaddress['id']
-        print('CELL: %S\n' % cell)
+        
+        if request.method == 'POST':
+            msg = request.POST['msg']
+            s = Session(request.body)
+            cell = s.fromaddress['id']
 
 # lookup patient with this cell #
-        if cell[0]=='1':   # trim leading 1 in cell # if there
-            cell = cell[1:]
-        print('Cell #%s' % cell)
-        p = Patient.objects.filter(cell=cell)   # all patients with this cell #
-        if p.exists():                                    # if cell # found then create new entry
-            if p.count()>1:
-                print('WARNING: Multiple patients with cell # %s' % cell)
-            parent = p[0]  # assume first 
-            entry = Entry(patient=parent, entry=msg)
-            entry.save()
-            if msg.find('CODE')>-1:
-                json = t.say("Congratulations " + parent.name + " your code qualified you for a prize!")            
-            else:
-                json = t.say("Entry saved, thank you " + parent.name)
-            json = t.RenderJson(json)
-        else:                                               # if cell # NOT found then notify
-            json = t.say("Could not find patient with cell # " + cell)
-            json = t.RenderJson(json)
+            if cell[0]=='1':   # trim leading 1 in cell # if there
+                cell = cell[1:]
+            p = Patient.objects.filter(cell=cell)   # all patients with this cell #
+            if p.exists():                                    # if cell # found then create new entry
+                if p.count()>1:
+                    print('WARNING: Multiple patients with cell # %s' % cell)
+                parent = p[0]  # assume first 
+                entry = Entry(patient=parent, entry=msg)
+                entry.save()
+                if msg.find('CODE')>-1:
+                    json = t.say("Congratulations " + parent.name + " your code qualified you for a prize!")            
+                else:
+                    json = t.say("Entry saved, thank you " + parent.name)
+                json = t.RenderJson(json)
+            else:                                               # if cell # NOT found then notify
+                json = t.say("Could not find patient with cell # " + cell)
+
+        else:
+                json = t.say("HTTP GET")
+
+        json = t.RenderJson(json)
 
         return HttpResponse(json)
     except Exception, err:
