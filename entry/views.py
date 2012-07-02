@@ -22,7 +22,8 @@ def hello(request):
         if('parameters' in dir(session)):
             print('Found Params')
 
-            print('Params:%s' % session.parameters)
+            print('To:%s' % session.parameters['to'])
+            print('Msg:%s' % session.parameters['msg'])
             t.call(to="+17816408832", network = "SMS")
             t.say("Tag, you're it!")
             return t.RenderJson()
