@@ -15,12 +15,14 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def hello(request):
-    t = Tropo()
-    msg = request.POST['msg']
-    
     try:
+        t = Tropo()
+        msg = request.POST['msg']
+
+        print('MSG: %S\n' % msg)
         s = Session(request.body)
         cell = s.fromaddress['id']
+        print('CELL: %S\n' % cell)
 
 # lookup patient with this cell #
         if cell[0]=='1':   # trim leading 1 in cell # if there
@@ -153,7 +155,7 @@ def AddEntry(request):
 
 def send_message(cell, msg):
     base_url = 'http://api.tropo.com/1.0/sessions'
-    token = '12daaf2f2af6544eb5b8eae626a666bb4f89ccc541e31709bedaacbcb9bdde8bc968cc06d2019ef2f0bde72a'      
+    token = '13bed2b0b149a5449342d27e3728470c308535c1c2033349cc1735d293bcd3dfbc64601eab5934e7c45c52f1'      
     action = 'create'
     number  = cell
     message = msg
