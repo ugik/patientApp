@@ -20,9 +20,8 @@ def hello(request):
                 
         session = Session(request.body)
         if('parameters' in dir(session)):
-            print('Found Params')
+            print('Message request')
 
-            print('To:%s' % session.parameters['to'])
             t.call(to="+"+session.parameters['to'].strip(), network = "SMS")
             json = t.say(session.parameters['msg'])
             json = t.RenderJson(json)
@@ -79,9 +78,11 @@ def PatientRegistration(request):
             # text patient if cell # provided
             if len(patient.cell)==10:
                 t = Tropo()
-                t.say("Thank you for registering " + patient.name)
-                t.message("Thank you for registering.", to="+17813128445", network = "SMS")
-                t.RenderJson()
+                t.call(to="+1"+patient.cell, network = "SMS")
+                json = t.say("Thank you for registering " + patient.name)
+                json = t.RenderJson(json)
+                return HttpResponse(json)
+
                 print "Registration confirmation sent"
 
             return HttpResponseRedirect('/profile/')
