@@ -23,7 +23,7 @@ def hello(request):
             print('Found Params')
 
             print('To:%s' % session.parameters['to'])
-            t.call(to="+"+session.parameters['to'], network = "SMS")
+            t.call(to="+"+session.parameters['to'].strip(), network = "SMS")
             json = t.say(session.parameters['msg'])
             json = t.RenderJson(json)
             return HttpResponse(json)
