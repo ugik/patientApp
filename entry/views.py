@@ -78,12 +78,6 @@ def PatientRegistration(request):
             # text patient if cell # provided
             if len(patient.cell)==10:
 
-#                t = Tropo()
-#                t.call(to="+1"+patient.cell, network = "SMS")
-#                json = t.say("Thank you for registering " + patient.name)
-#                json = t.RenderJson(json)
-#                return HttpResponse(json)
-
                 try:
                     send_message("1"+patient.cell, "Thank you for registering.")
                     print "Registration confirmation sent"
