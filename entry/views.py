@@ -85,7 +85,7 @@ def PatientRegistration(request):
 #                return HttpResponse(json)
 
                 try:
-                    send_message("+1"+patient.cell, "Thank you for registering.")
+                    send_message("1"+patient.cell, "Thank you for registering.")
                     print "Registration confirmation sent"
                 except Exception, err:
                     print('ERROR: %s\n' % str(err))
