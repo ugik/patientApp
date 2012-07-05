@@ -170,6 +170,6 @@ def send_message(cell, msg):
     number  = cell
     message = msg
         
-    params = urlencode([('action', action), ('token', token), ('to_num', number), ('message', message), ('outgoing', True)])
+    params = urlencode([('action', action), ('token', token), ('to', number), ('msg', message), ('outgoing', True)])
     urlopen('%s?%s' % (base_url, params))
 
